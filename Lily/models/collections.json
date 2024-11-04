@@ -1,0 +1,52 @@
+{
+	"users": {
+		"user:127634":	{
+			"id": "127634",
+			"first_name": "John",
+			"last_name": "Eric",
+			"age": "17",
+			"email": "jneric49@gmail.com",
+			"picture": "https://place-hold.co/300",
+			"createdAt": "2024-09-11 2:56:00",
+			"updatedAt": "2024-09-11 2:56:13",
+			"hashed_password": "dhsye7g3g3gdwdd",
+			"session_id": "27wg66273267272762",
+			"reset_token": "23425",
+			"books": [
+				123132,
+				143132,
+				635263,
+				763653
+			]
+		},
+		"user:789634":	{
+			"id": "789634",
+			"first_name": "Vash",
+			"last_name": "Tire",
+			"age": "17",
+			"email": "vashtire@example.com",
+			"picture": "https://place-hold.co/300",
+			"createdAt": "2024-09-11 2:56:00",
+			"updatedAt": "2024-09-11 2:56:13",
+			"hashed_password": "dhsye7g3g3gdwdd",
+			"session_id": "27wg66273267272762",
+			"reset_token": "23425",
+			"books": []
+		}
+	},
+
+
+	"books": {
+		"book:123132": {
+			"id": "123132",
+			"title": "The Spring",
+			"author": "789634",
+			"blob": "In a World where... blah blah blah",
+			"thumbnail": "https://cloudinary/uploads/the_spring.png?size=300x400&",
+			"book_cover": "https://cloudinary/uploads/the_spring.png",
+			"genre": "Mystery",
+			"age_range": [7, 13],
+			"content":""
+		}
+	}
+}

@@ -1,0 +1,39 @@
+{% extends './base.html' %}
+
+<!-- Link tags: Empty -->
+{% block linkTags %}
+{% endblock linkTags %}
+
+<!-- Page title: Lily -->
+{% block pageTitle %}{{ title }}{% endblock pageTitle %}
+
+
+<!-- Home page content -->
+{% block contentContainer %}
+<div id="home_page_content_container" class="page_content_container flex_col">
+    <section id="section1" class="sections">
+        <!-- <h1>Section 1</h1> -->
+        <div style="background-image: url(../static/flower\ lily);" class="welcome_section_image">
+            <div style="background-color:rgba(0, 0, 0, 0.4);" class="flex_col justify_center align_center">
+                <h1 style="padding-top: 5px;color: white;text-shadow: 0 0 60px rgba(0, 0, 0, 0.546);text-align: center;">Welcome to Lily</h1>
+                <h1 style="padding: 10px 20px 20px 20px;color: white;text-shadow: 0 0 60px rgba(0, 0, 0, 0.546);text-align: center;">Blossom at everything</h1>
+            </div>
+        </div>
+        <!-- <div style="background-image: url(../static/blossoming\ cherry\ tree.jpg);" class="welcome-section-image">
+        </div> -->
+    </section>
+    <section id="section2" class="sections">
+        <h1>Section 2</h1>
+        <!-- <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div>
+        <div class="book"></div> -->
+    </section>
+</div>
+{% endblock contentContainer %}

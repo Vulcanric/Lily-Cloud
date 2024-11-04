@@ -1,0 +1,54 @@
+{% extends './base.html' %}
+
+{% block pageTitle %}{{title}}{% endblock pageTitle %}
+
+{}
+{% block contentContainer %}
+<div id="bookPageContentContainer" class="page-contentContainer flex-direction__column">
+    <h1 style="font-size:45px;margin-bottom: 30px;font-style:;">{{title}}</h1>
+{% if action == "create" %}
+<form action="/book/create" method="post">
+    <label for="title">Name of book</label><br>
+    <input class="create-book-formtext" id="title" name="title" placeholder="Ex. The Adventure of Paddinton" type="text" required><br>
+
+    <!-- <hr style="line-break: normal;"><br> -->
+    <label for="description">Provide a description</label><br>
+    <textarea name="description" id="description" placeholder="Your description should be a minimum of 50 words and maximum of 200 words" cols="70" rows="10" spellcheck="true" required></textarea><br>
+
+    <!-- <hr style="line-break: normal;"><br> -->
+    <label draggable="true" for="genre">What genre is your book</label><br>
+    <input list="list-of-genre" id="genre" type="text" name="genre" placeholder="Please select a genre that best describe your book" required><br>
+    <datalist id="list-of-genre">
+        <option value="fantasy">Fantasy</option>
+        <option value="adventure">Adventure</option>
+        <option value="children story book">Children Story Book</option>
+        <option>Science Fiction</option>
+        <option>Mystery</option>
+        <option>Comic</option>
+        <option>Thriller</option>
+        <option>Biography</option>
+        <option>Educative books</option>
+        <option value="">Others</option>
+    </datalist>
+
+    <label for="tags">Select tags that identify your book</label><br>
+    <input type="text" placeholder="Select all that apply" readonly required>
+</form>
+{% elif action == "read" %}
+{% elif action == "search" %}
+    <hr>
+    <div id="bookGenreDivsWrapper" class="flex-direction__row align-items__center justify-content__center">
+        {% for genre in book_genres %}
+        <a href="/book/{{action}}?genre={{ genre.get('genre_name') }}" class="bookHoverEffect">
+            <div class="bookGenreDiv" style="background-image: url( {{genre.get('genre_image_url')}} );">
+                <h1 class="bookGenreName" style="font-size: 45px; color: rgb(255, 255, 255);font-style: italic;">
+                    {{genre.get('genre_name')}}
+                </h1>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+{% endblock contentContainer %}
