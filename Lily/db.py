@@ -15,7 +15,7 @@ from Lily.exceptions import (NoResultFound, InvalidRequestError)
 class DB:
     """ Application storage engine model
 
-    Responsible in making Lily's data persist.
+    Responsible in making Lily's data persistent.
 
     Defines CRUD methods such as:
         - add_user: adds a user to the database

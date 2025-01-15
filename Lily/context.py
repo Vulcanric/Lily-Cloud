@@ -57,7 +57,7 @@ def create_template_variables(request: Request) -> Dict[str, Any]:
     except NoResultFound:
         user = None
     template_variables = {
-        "title": None,
+        "title": "",
         "is_signedin": True if user else False,
         "user_name": f"{user.first_name} {user.last_name}" if user else None,
         "user_picture": user.picture if user else None,

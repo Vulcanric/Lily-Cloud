@@ -42,6 +42,7 @@ class Auth:
         If user already exist, raise ValueError(User <useremail> already exists)
         Otherwise, save user to database and return the user object
         """
+        print(attributes)
         # Check if the email is already registered
         try:
             user = self._db.find_user_by(email=attributes["email"])

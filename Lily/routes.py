@@ -23,11 +23,11 @@ def home():
     """ Home page view function/handler
     """
     template_variables = create_template_variables(request)
-    template_variables["title"] = "Welcome to Lily, a place where we blossom",
+    template_variables["title"] = "Welcome to Lily"
     return render_template("home.html", **template_variables)
 
 
-@app.route("/users", methods=["GET", "POST"])
+@app.route("/register", methods=["GET", "POST"])
 def register() -> Response:
     """ Registers a user and logs them in automatically
     """
@@ -41,15 +41,14 @@ def register() -> Response:
         try:
             user = AUTH.register_user(**request.form)
             session_id = AUTH.create_session(user.email)
-            payload = {"status": 1, "reason": "Registration successful"}
-            response = redirect(url_for("home"), 302, make_response(jsonify(payload)))
+            response = make_response(jsonify({"status": 1, "reason": "Registration successful"}))
             response.set_cookie("session_id", session_id)
         except ValueError:  # User email already registered
             response = jsonify({"status": -1, "reason": "Email already registered"}), 400  # Bad request
         return response
 
 
-@app.route("/sessions", methods=["GET", "POST"])
+@app.route("/login", methods=["GET", "POST"])
 def login():
     """ Log a user in
     """
@@ -62,14 +61,13 @@ def login():
         password = request.form.get("password")
         if AUTH.valid_login(email, password):
             session_id = AUTH.create_session(email)
-            payload = {"status": 1, "reason": "Signed in successfully!"}
-            response = redirect(url_for("home"), 302, make_response(jsonify(payload)))
+            response = make_response(jsonify({"status": 1, "reason": "Signed in successfully!"}))
             response.set_cookie("session_id", session_id)
         else:
-            response = jsonify({"status": -1, "reason": "Incorrect password, try again"}), 403
+            response = jsonify({"status": -1, "reason": "This account doen't exist or incorrect password"}), 403  # Forbidden
         return response
 
-@app.route("/sessions", methods=["DELETE"])
+@app.route("/logout", methods=["DELETE"])
 def logout():
     """ Logs a user out by destroying their session
     """

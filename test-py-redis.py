@@ -14,7 +14,7 @@ class User(JsonModel):
     profession: str = Field(index=True)
 
 eric = User(
-    id="363y3635f3"
+    id="1",
     first_name="Eric",
     last_name="John",
     age=17,
@@ -22,6 +22,7 @@ eric = User(
 )
 
 ava = User(
+    id="2",
     first_name="Ava",
     last_name="Harrison",
     age=19,
@@ -29,6 +30,7 @@ ava = User(
 )
 
 boniface = User(
+    id="3",
     first_name="Boniface",
     last_name="",
     age=32,

@@ -6,12 +6,14 @@
 <hr>
 {% endblock formTitle %}
 
+{% block formPurpose %}"register"{% endblock formPurpose %}
+
 {% block otherInfo %}
 <p class="form_iteraction">We need your age to give you the best experience</p>
 <input id="age" type="number" name="age" placeholder="5 years" required>
 {% endblock otherInfo %}
 
 {% block formFooter %}
-<p class="form_iteraction">Already have an account? <a class="form_redirect" href="/sessions">login</a></p>
+<p class="form_iteraction">Already have an account? <a class="form_redirect" href="/login">login</a></p>
 <p class="form_iteraction">By signing up, you agree to our <a class="form_redirect" href="">terms of service</a></p><br>
 {% endblock formFooter %}
