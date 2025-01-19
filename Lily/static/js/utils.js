@@ -18,7 +18,7 @@ export function submitForm(event) {
 }
 
 
-export function validateUserInput() {
+function validateUserInput() {
   const userEmail = document.getElementById("email");
   const userAge = document.getElementById("age");
   const FORMAT = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/g
@@ -33,7 +33,7 @@ export function validateUserInput() {
   }
 }
 
-export function validateUser() {
+function validateUser() {
   const form = document.getElementById("form");
   const purpose = form.getAttribute("purpose");
 
@@ -100,10 +100,6 @@ export function togglePasswordVisibility() {
         passwordIcon.innerHTML = buttonIcons["eye_close"];
     }
 }
-const passwordIcon = document.getElementById("password_eye");
-if (passwordIcon) {
-    passwordIcon.addEventListener('click', togglePasswordVisibility);
-}
 
 
 export function logUserOut(event) {
@@ -128,7 +124,7 @@ export function logUserOut(event) {
 }
 
 
-export function showPopover(message) {
+function showPopover(message) {
     const popup = document.getElementById('popup')
     const info = document.getElementById('popup_message');
 
@@ -140,7 +136,7 @@ export function showPopover(message) {
 }
 
 
-export function alertCustom(message) {
+function alertCustom(message) {
     let formAlert = document.getElementById('form_alert');
     formAlert.hidden = false;
     formAlert.innerText = message;
