@@ -104,10 +104,11 @@ def book(action: str) -> Response:
     elif action == "read":
         title = ""
     elif action == "search":
-        title = "Search for your favorite genre"
+        title = "What's your favorite genre?"
 
     template_variables["title"] = title
     template_variables["action"] = action
+    template_variables["quote"] = quote;
     return render_template("book.html", **template_variables)
 
 
