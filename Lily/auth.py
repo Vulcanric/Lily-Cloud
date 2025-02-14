@@ -52,7 +52,7 @@ class Auth:
             print("Before ->", attributes, sep="\n")
 
             attributes.update({
-                "picture": f"https://eu.ui-avatars.com/api/?name={attributes.get('first_name')}+{attributes.get('last_name')}&size=50",
+                "picture": f"https://eu.ui-avatars.com/api/?name={attributes.get('first_name')}+{attributes.get('last_name')}",
                 "hashed_password": _hash_password_(attributes["password"]),
             })
             attributes.pop("password")
