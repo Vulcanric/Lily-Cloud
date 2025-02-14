@@ -4,8 +4,8 @@
 
 {}
 {% block contentContainer %}
-<div id="bookPageContentContainer" class="page-contentContainer flex-direction__column">
-    <h1 style="font-size:45px;margin-bottom: 30px;font-style:;">{{title}}</h1>
+<div id="book_page_content_container" class="page_content_container flex_col">
+    <h1 class="text_gradient" style="font-size:45px;margin-bottom: 30px;">{{title}}</h1>
 {% if action == "create" %}
 <form action="/book/create" method="post">
     <label for="title">Name of book</label><br>
@@ -37,11 +37,11 @@
 {% elif action == "read" %}
 {% elif action == "search" %}
     <hr>
-    <div id="bookGenreDivsWrapper" class="flex-direction__row align-items__center justify-content__center">
+    <div id="book_genres_wrapper" class="flex_row align_center">
         {% for genre in book_genres %}
-        <a href="/book/{{action}}?genre={{ genre.get('genre_name') }}" class="bookHoverEffect">
-            <div class="bookGenreDiv" style="background-image: url( {{genre.get('genre_image_url')}} );">
-                <h1 class="bookGenreName" style="font-size: 45px; color: rgb(255, 255, 255);font-style: italic;">
+        <a href="/book/{{action}}?genre={{quote(genre.get('genre_name').lower())}}">
+            <div class="book_genre" style="background-image: url( {{genre.get('genre_image_url')}} );">
+                <h1 class="book_genre_name" style="font-size: 45px; color: rgb(255, 255, 255);font-style: italic;">
                     {{genre.get('genre_name')}}
                 </h1>
             </div>
