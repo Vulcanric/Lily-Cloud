@@ -1,6 +1,6 @@
 import {
     submitForm, logUserOut,
-    toggleSideBar, togglePasswordVisibility
+    togglePasswordVisibility
 } from "./utils.js";
 
 const form = document.getElementById("form");
@@ -20,7 +20,6 @@ logout.forEach((elem) => {
 
 const toggleSideBarButton = document.getElementById("toggle_side_nav_items");
 if (toggleSideBarButton) {
-    toggleSideBarButton.addEventListener('click', toggleSideBar);
 }
 
 const passwordIcon = document.getElementById("password_eye");

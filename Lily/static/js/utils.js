@@ -17,7 +17,6 @@ export function submitForm(event) {
   }
 }
 
-
 function validateUserInput() {
   const userEmail = document.getElementById("email");
   const userAge = document.getElementById("age");
@@ -68,27 +67,6 @@ function validateUser() {
       }, delay);
     })
 }
-
-
-export function toggleSideBar(){
-
-    const sideBarItems = document.querySelectorAll(".hideable");
-    sideBarItems.forEach((item) => {
-        if (item.hidden) { // Show side bar
-            item.hidden = false;
-            item.classList.add(['flex_col']);
-            toggleSideBarButton.title = "Close side navigation";
-            toggleSideBarButton.innerHTML = buttonIcons["arrow_up"];
-        } else {
-            item.hidden = true; // Hide side bar
-            console.log(`I passed here. hidden: ${item.hidden}`);
-            item.classList.remove(['flex_col']);
-            toggleSideBarButton.title = "Open side navigation";
-            toggleSideBarButton.innerHTML = buttonIcons["arrow_down"];
-        }
-    });
-};
-
 
 export function togglePasswordVisibility() {
     const passwordInputField = document.getElementById("password");
