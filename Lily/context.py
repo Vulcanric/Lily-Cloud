@@ -60,7 +60,7 @@ def create_template_variables(request: Request) -> Dict[str, Any]:
         "title": "",
         "is_signedin": True if user else False,
         "user_name": f"{user.first_name} {user.last_name}" if user else None,
-        "user_picture": user.picture if user else None,
+        "user": user if user else None,
         "form_page": False,
         "register": False,
         "book_genres": book_genres,
