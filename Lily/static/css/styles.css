@@ -2,6 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+Grund:wght@100..400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
 
+:root {
+    interpolate-size: allow-keywords;
+}
 
 body {
     --lily-lightmode-header-color: #ffffff;
@@ -20,6 +23,8 @@ body {
 
 /* Classes */
 * {
+    width: fit-content;
+    height: fit-content;
     margin: 0;
     padding: 0;
     text-decoration: none;
@@ -28,6 +33,7 @@ body {
     font-family: Consolas, 'Courier New', monospace;
     font-family: 'Playwrite DE Grund';
     font-family: Fredoka;
+    font-size: large;
     box-sizing: border-box;
 }
 
@@ -38,20 +44,37 @@ body {
     width: 100dvw;
     height: 100dvh;
     scroll-behavior: smooth;
+    height: fit-content;
 }
 
-.lily_buttons {
+button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.button {
     padding: 5px;
     width: 120px;
     height: 50px;
     cursor: pointer;
-    font-family:Arial, Helvetica, sans-serif;
-    font-size: large;
-    color: #2c2307;
-    border-radius: 10px;
-    border: 2px solid bisque;
-    background-image: linear-gradient(#f97b05, #e6af2d);
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.main_btn {
+    color: white !important;
+    background-color: #FF8E05 !important;
+    /* border: none; */
+    /* background-image: radial-gradient(#e6af2d 50%, #f97b05); */
+    /* border-image-outset: 0; */
+    /* background-image: linear-gradient(#f97b05, #e6af2d); */
+    /* background-color: #f6f6f6; */
+    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); */
+}
+.sub_btn {
+    color: #FF8E05 !important;
+    background-color: transparent !important;
+    border: 2px solid #FF8E05 !important;
 }
 
 .lily_buttons:hover, .lily_buttons:active {
@@ -68,30 +91,31 @@ svg {
 
 /* End of classes */
 
-#body_container {
+#root {
     width: 100%;
     height: 100%;
     background-color: var(--lily-lightmode-background-color) !important;
     display: flex;
     flex-direction: column;
     border: 1px solid;
-    overflow-x: hidden;
 }
 
 /* Page header */
 #page_header {
     width: 100dvw;
     height: 85px;
-    border-bottom: 1px solid #DDDDDD;
-    background-color: var(--lily-lightmode-header-color);
     display: flex;
     align-items: center;
-    font-size: 110%;
+    justify-content: space-between;
+    padding: 0 30px;
+    /* font-size: 110%; */
+    border-bottom: 1px solid #DDDDDD;
+    background-color: var(--lily-lightmode-header-color);
     z-index: -0;
 }
 
 /** Brand identity by logo and text **/
-#brand_container {
+#header\:brand {
     margin: 20px;
     width: fit-content;
     height: 100%;
@@ -118,16 +142,11 @@ h1 {
     /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.445); */
 }
 
-/** Navigation **/
-.navigation {
-    display: flex;
-    justify-content: space-around;
-}
 
 #top_nav {
     margin: 0 10px 0 30px;
+    display: flex;
     flex-direction: row;
-    flex-shrink: 1;
 }
 
 .top_nav_items {
@@ -137,7 +156,7 @@ h1 {
 
 /** Search box **/
 #search_box {
-    width: 30%;
+    width: 45%;
     height: 50%;
     display: flex;
     align-items: center;
@@ -154,7 +173,7 @@ h1 {
 /* Search input elem */
 #search_input {
     padding: 20px;
-    width: 75%;
+    width: 100%;
     height: 100%;
     font-size: 90%;
     border-radius: 15px 0 0 15px;
@@ -183,12 +202,12 @@ input:not([type="submit"],[type="reset"]):focus {
 
 
 /** User Section: top-right corner **/
-#user_section {
-    width: 20%;
+#header\:user {
+    width: fit-content;
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: end;
+    margin: 0 30px;
 }
 
 
@@ -203,20 +222,30 @@ input:not([type="submit"],[type="reset"]):focus {
 }
 
 #side_nav {
-    width: 8%;
-    height: 100dvh;
-    display: grid;
-    grid-template-rows: repeat(10, 10%);
-    grid-template-columns: 100%;
-    gap: 20px;
-    background-color: transparent;
+    margin-top: 20px;
+    padding: 0 20px 30px;
+    height: 75px;
+    overflow: hidden;
+    transition: height .5s ease;
+    border: none;
+    border-radius: 0 15px 15px 0;
+    /* border-top-left-radius: 0;
+    border-bottom-left-radius: 0; */
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: +5;
+}
+#side_nav:hover,
+#side_nav:focus {
+    height: max-content;
+    /* border: 2px ridge lightslategray; */
+    border-radius: 0 15px 15px 0;
 }
 
 .side_nav_items {
-    width: 120%;
+    width: 100px;
     height: 120%;
     margin: 8px;
+    padding: 10px 15px;
     border-radius: 5px;
     background-color: #ffffff;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
@@ -236,7 +265,7 @@ input:not([type="submit"],[type="reset"]):focus {
     background-color: transparent;
 }
 #toggle_side_nav_items {
-    height: 30%;
+    height: 40px;
     width: auto;
     border: none;
     border-radius: 4px;
@@ -309,12 +338,11 @@ button#toggle_side_nav_items:hover {
     /* margin-top: 86px; */
     width: 100dvw; 
     height: 100dvh;
-    justify-content: center;
     align-items: center;
 }
 
 #form_page_content_container {
-    background-image: url(/Lily/static/assets/flower\ lily);
+    background-image: url(../assets/flower\ lily.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -385,8 +413,11 @@ input:not([type="search"])::placeholder {
     right: 50;
 }
 
-#welcome_text {
+#welcome_text_title {
     margin: 20px 0px;
+    font-size: 40px;
+}
+#welcome_text_subtitle {
     font-size: 30px;
 }
 
@@ -404,6 +435,7 @@ input:not([type="search"])::placeholder {
     background-clip: text;
     background-image: linear-gradient(#f97b05, #e6af2d);
     color: transparent;
+    text-wrap: wrap;
 }
 
 .form_iteraction {
@@ -437,9 +469,12 @@ input:not([type="search"])::placeholder {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     background-repeat: no-repeat;
     background-size: cover;
+    &>div {
+        position: relative;
+        top: 18%;
+    }
 }
 .welcome_section_image > h1 {
     /* margin: 100px; */
@@ -468,13 +503,13 @@ input:not([type="search"])::placeholder {
 #book_genres_wrapper {
     width: 100%;
     height: 100%;
-    height: fit-content;
     flex-wrap: wrap;
-    gap: -20px;
+    gap: 20px;
     overflow-y:auto;
     perspective: 1500px;
+    justify-content: center;
 }
-.book_genres {
+.book_genre {
     width: 350px;
     height: 450px;
     border: 5px ridge lightslategrey;
@@ -490,9 +525,97 @@ input:not([type="search"])::placeholder {
     transition: transform 2s ease;
     transform: rotateY(30deg);
 }
-.book_hover_effect:hover, .book_genre:hover {
+.book_genre:hover {
     transform: none;
 }
+
+#user_popup {
+    margin: auto;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    width: 60%;
+    height: 80%;
+    padding: 50px;
+    /* display: flex; */
+    flex-direction: column;
+    align-items: center;
+    border: none;
+    padding: 10px;
+    overflow: hidden;
+    background-image: linear-gradient(#55302D, #121212);
+    &> h1 {
+        position: relative;
+        top: 18%;
+        color: #EEE;
+        font-size: 40px;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        &>span {
+            font-size: larger;
+        }
+    }
+}
+#user_popup:popover-open {
+    display: flex;
+}
+#user_banner {
+    width: 100%;
+    height: 40%;
+    border-radius:5px;
+    background-image: url('../assets/cozy\ room.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#user_popup_image {
+    background-color:transparent;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    position: absolute;
+    top: 23%;
+    &>img {
+        border: 2px solid #ccc;
+    }
+}
+#close_user_popup {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    background-color: transparent;
+    font-size: 35px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &>span {
+        font-size: larger;
+        color: white;
+    }
+}
+#close_user_popup:hover {
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
+}
+
+.wave {
+    animation-name: wave-animation;  /* Refers to the name of your @keyframes element below */
+    animation-duration: 2.5s;        /* Change to speed up or slow down */
+    animation-iteration-count: 2;  /* Never stop waving :) */
+    transform-origin: 70% 70%;       /* Pivot around the bottom-left palm */
+    display: inline-block;
+}
+  
+@keyframes wave-animation {
+    0% { transform: rotate( 0.0deg) }
+    10% { transform: rotate(20.0deg) }  /* The following five values can be played with to make the waving more or less extreme */
+    20% { transform: rotate(-8.0deg) }
+    30% { transform: rotate(14.0deg) }
+    40% { transform: rotate(-4.0deg) }
+    50% { transform: rotate(10.0deg) }
+    60% { transform: rotate( 0.0deg) }  /* Reset for the last half to pause */
+    100% { transform: rotate( 0.0deg) }
+  }
 
 @keyframes scalein {
     from {
@@ -509,12 +632,12 @@ input:not([type="search"])::placeholder {
 }
 
 #book_page_content_container {
-    /* background-image: url(chan-hoi-uj-w-v7OFT4-unsplash.jpg); */
+    background-image: url(../assets/chan-hoi-uj-w-v7OFT4-unsplash.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 800px) {/* Any size smaller than max-width will have the stylings below */
     .sm {
         display: none;
     }

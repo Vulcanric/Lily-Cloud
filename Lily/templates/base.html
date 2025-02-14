@@ -16,17 +16,17 @@
 </head>
 
 <body>
-    <div id="body_container">
+    <div id="root">
         <header id="page_header" class="position_fixed">
-            <div id="brand_container">
+            <div id="header:brand">
                 <!-- <a href="">
                     <img id="lily_logo" src="../static/logo.png" alt="Lily's logo" width="60px">
                 </a> -->
                 <h1 id="lily_text">Lily</h1>
             </div>
 
-            <nav class="sm">
-                <ul id="top_nav" class="navigation sm">
+            <nav class="sm header:top_nav">
+                <ul id="top_nav">
                     <li class="top_nav_items sm"><a href="/">Home</a></li>
                     <li class="top_nav_items sm"><a href="/book/search">Library</a></li>
                     <li class="top_nav_items sm"><a href="/book/create">Create</a></li>
@@ -40,15 +40,17 @@
                 </button>
             </form>
 
-            <div id="user_section">
+            <div id="header:user">
                 {% if form_page %}
                 {% elif is_signedin %}
-                <a href="{{ url_for('user') }}">
-                    <img class="border_radius_50" src="{{user_picture}}" alt="">
-                </a>
+                <button type="button" popovertarget="user_popup">
+                    <img class="border_radius_50" src="{{user.picture + '&size=50'}}" alt="">
+                </button>
                 <strong style="margin-left: 10px;">{{user_name}}</strong>
                 {% else %}
-                <button id="login_button" onclick="document.href.location = '/login'" class="lily_buttons">Log In</button>
+                <a href="/login">
+                    <button id="login_button" class="button main_btn">Login</button>
+                </a>
                 {% endif %}
             </div>
         </header>
@@ -56,69 +58,87 @@
         <div id="popup" popover>
             <p id="popup_message" style="color: black;"></p>
         </div>
+        {% if is_signedin %}
+        <div id="user_popup" popover>
+            <button id="close_user_popup" aria-label="close profile" popovertarget="user_popup" popovertargetaction="hide">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <button type="button" id="user_banner">
+            </button>
+            <button id="user_popup_image" type="button">
+                <img src="{{user.picture + '&size=170'}}" alt="{{user_name}}" class="border_radius_50">
+            </button>
+            <hr>
+            <h1>Hey! {{user.first_name}} <span class="wave">👋</span></h1>
+        </div>
+        {% endif %}
 
         {% if form_page %}
         {% else %}
         <main id="page_main">
 
             <!-- Side Navigation -->
-            <div id="side_nav" class="navigation position_fixed" hidden>
-                <div class="side_nav_items hideable justify_center" hidden>
-                    <a href="/user" class="flex_col justify_center align_center">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" height="25px" viewBox="0 -960 960 960" width="25px" fill="#2c2307"><path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z"/></svg>
-                        </span>
-                        me
-                    </a>
-                </div>
-                <div class="side_nav_items hideable justify_center" hidden>
-                    <a href="#" class="flex_col justify_center align_center">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" height="23px" viewBox="0 0 448 512" fill="#2c2307"><path d="M448 360V24c0-13.3-10.7-24-24-24H96C43 0 0 43 0 96v320c0 53 43 96 96 96h328c13.3 0 24-10.7 24-24v-16c0-7.5-3.5-14.3-8.9-18.7-4.2-15.4-4.2-59.3 0-74.7 5.4-4.3 8.9-11.1 8.9-18.6zM128 134c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm0 64c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm253.4 250H96c-17.7 0-32-14.3-32-32 0-17.6 14.4-32 32-32h285.4c-1.9 17.1-1.9 46.9 0 64z" fill="#434343" class="fill-000000"></path></svg>
-                        </span>
-                        clubs
-                    </a>
-                </div>
-                <div class="side_nav_items hideable justify_center" hidden>
-                    <a href="#" class="flex_col justify_center align_center">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#2c2307"><path d="M480-600 340-740l140-140 140 140-140 140ZM40-160v-160q0-34 23.5-57t56.5-23h131q20 0 38 10t29 27q29 39 71.5 61t90.5 22q49 0 91.5-22t70.5-61q13-17 30.5-27t36.5-10h131q34 0 57 23t23 57v160H640v-91q-35 25-75.5 38T480-200q-43 0-84-13.5T320-252v92H40Zm120-280q-50 0-85-35t-35-85q0-51 35-85.5t85-34.5q51 0 85.5 34.5T280-560q0 50-34.5 85T160-440Zm640 0q-50 0-85-35t-35-85q0-51 35-85.5t85-34.5q51 0 85.5 34.5T920-560q0 50-34.5 85T800-440Z"/></svg>
-                        </span>
-                        team up
-                    </a>
-                </div>
-                <div class="side_nav_items hideable justify_center" hidden>
-                    <a href="#" class="flex_col justify_center align_center">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="35" height="35" viewBox="0 0 48 48" fill="#2c2307">
-                                <path d="M39.5 6h-5C32.57 6 31 7.57 31 9.5v29c0 1.93 1.57 3.5 3.5 3.5h5c1.93 0 3.5-1.57 3.5-3.5v-29C43 7.57 41.43 6 39.5 6zM35.5 12.5c0-.829.672-1.5 1.5-1.5s1.5.671 1.5 1.5v15c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5V12.5zM38.5 37h-3c-.828 0-1.5-.671-1.5-1.5s.672-1.5 1.5-1.5h3c.828 0 1.5.671 1.5 1.5S39.328 37 38.5 37zM13.5 6h-5C6.57 6 5 7.57 5 9.5v29C5 40.43 6.57 42 8.5 42h5c1.93 0 3.5-1.57 3.5-3.5v-29C17 7.57 15.43 6 13.5 6zM9.5 12.5c0-.829.672-1.5 1.5-1.5s1.5.671 1.5 1.5v15c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5V12.5zM12.5 37h-3C8.672 37 8 36.329 8 35.5S8.672 34 9.5 34h3c.828 0 1.5.671 1.5 1.5S13.328 37 12.5 37zM25.5 12h-3c-1.93 0-3.5 1.57-3.5 3.5v23c0 1.93 1.57 3.5 3.5 3.5h3c1.93 0 3.5-1.57 3.5-3.5v-23C29 13.57 27.43 12 25.5 12zM24.5 37h-1c-.828 0-1.5-.671-1.5-1.5s.672-1.5 1.5-1.5h1c.828 0 1.5.671 1.5 1.5S25.328 37 24.5 37zM24.5 20h-1c-.828 0-1.5-.671-1.5-1.5s.672-1.5 1.5-1.5h1c.828 0 1.5.671 1.5 1.5S25.328 20 24.5 20z"></path>
-                            </svg>
-                        </span>
-                        my shelf
-                    </a>
-                </div>
-                {% if is_signedin %}
-                <div class="side_nav_items hideable justify_center logout" hidden>
-                    <a href="#" class="flex_col justify_center align_center">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#2c2307"><path d="M440-440q17 0 28.5-11.5T480-480q0-17-11.5-28.5T440-520q-17 0-28.5 11.5T400-480q0 17 11.5 28.5T440-440ZM280-120v-80l240-40v-445q0-15-9-27t-23-14l-208-34v-80l220 36q44 8 72 41t28 77v512l-320 54Zm-160 0v-80h80v-560q0-34 23.5-57t56.5-23h400q34 0 57 23t23 57v560h80v80H120Zm160-80h400v-560H280v560Z"/></svg>
-                        </span>
-                        Logout
-                    </a>
-                </div>
-                {% endif %}
-                <div id="shown_toggle_buttons_wrapper" class="side_nav_items align_center">
+            <div id="side_nav" class="position_fixed flex_col align_center" tabindex="0">
+                <header class="align_center flex_row" style="width: fit-content;padding: 5px;">
                     <button id="toggle_nightday_button" title="Switch to night mode" class="side_nav_items">
                         <span>
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#2c2307"><path d="M484-80q-84 0-157.5-32t-128-86.5Q144-253 112-326.5T80-484q0-146 93-257.5T410-880q-18 99 11 193.5T521-521q71 71 165.5 100T880-410q-26 144-138 237T484-80Zm0-80q88 0 163-44t118-121q-86-8-163-43.5T464-465q-61-61-97-138t-43-163q-77 43-120.5 118.5T160-484q0 135 94.5 229.5T484-160Zm-20-305Z"/></svg>
                         </span>
                     </button>
-                    <button id="toggle_side_nav_items" class="side_nav_items title_showbar" title="Show side bar">
+                    <button id="toggle_side_nav_items" class="title_showbar" title="Show side bar">
                         <span>
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#2c2307"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
                         </span>
                     </button>
-                </div>
+                </header>
+                <main>
+                    <ul>
+                        <li>
+                            <a href="/user" class="flex_col side_nav_items justify_center align_center">
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="25px" viewBox="0 -960 960 960" width="25px" fill="#2c2307"><path d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z"/></svg>
+                                </span>
+                                <span>me</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex_col side_nav_items justify_center align_center">
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="23px" viewBox="0 0 448 512" fill="#2c2307"><path d="M448 360V24c0-13.3-10.7-24-24-24H96C43 0 0 43 0 96v320c0 53 43 96 96 96h328c13.3 0 24-10.7 24-24v-16c0-7.5-3.5-14.3-8.9-18.7-4.2-15.4-4.2-59.3 0-74.7 5.4-4.3 8.9-11.1 8.9-18.6zM128 134c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm0 64c0-3.3 2.7-6 6-6h212c3.3 0 6 2.7 6 6v20c0 3.3-2.7 6-6 6H134c-3.3 0-6-2.7-6-6v-20zm253.4 250H96c-17.7 0-32-14.3-32-32 0-17.6 14.4-32 32-32h285.4c-1.9 17.1-1.9 46.9 0 64z" fill="#434343" class="fill-000000"></path></svg>
+                                </span>
+                                <span>clubs</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex_col side_nav_items justify_center align_center">
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#2c2307"><path d="M480-600 340-740l140-140 140 140-140 140ZM40-160v-160q0-34 23.5-57t56.5-23h131q20 0 38 10t29 27q29 39 71.5 61t90.5 22q49 0 91.5-22t70.5-61q13-17 30.5-27t36.5-10h131q34 0 57 23t23 57v160H640v-91q-35 25-75.5 38T480-200q-43 0-84-13.5T320-252v92H40Zm120-280q-50 0-85-35t-35-85q0-51 35-85.5t85-34.5q51 0 85.5 34.5T280-560q0 50-34.5 85T160-440Zm640 0q-50 0-85-35t-35-85q0-51 35-85.5t85-34.5q51 0 85.5 34.5T920-560q0 50-34.5 85T800-440Z"/></svg>
+                                </span>
+                                <span>team up</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex_col side_nav_items justify_center align_center">
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="35" height="35" viewBox="0 0 48 48" fill="#2c2307">
+                                        <path d="M39.5 6h-5C32.57 6 31 7.57 31 9.5v29c0 1.93 1.57 3.5 3.5 3.5h5c1.93 0 3.5-1.57 3.5-3.5v-29C43 7.57 41.43 6 39.5 6zM35.5 12.5c0-.829.672-1.5 1.5-1.5s1.5.671 1.5 1.5v15c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5V12.5zM38.5 37h-3c-.828 0-1.5-.671-1.5-1.5s.672-1.5 1.5-1.5h3c.828 0 1.5.671 1.5 1.5S39.328 37 38.5 37zM13.5 6h-5C6.57 6 5 7.57 5 9.5v29C5 40.43 6.57 42 8.5 42h5c1.93 0 3.5-1.57 3.5-3.5v-29C17 7.57 15.43 6 13.5 6zM9.5 12.5c0-.829.672-1.5 1.5-1.5s1.5.671 1.5 1.5v15c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5V12.5zM12.5 37h-3C8.672 37 8 36.329 8 35.5S8.672 34 9.5 34h3c.828 0 1.5.671 1.5 1.5S13.328 37 12.5 37zM25.5 12h-3c-1.93 0-3.5 1.57-3.5 3.5v23c0 1.93 1.57 3.5 3.5 3.5h3c1.93 0 3.5-1.57 3.5-3.5v-23C29 13.57 27.43 12 25.5 12zM24.5 37h-1c-.828 0-1.5-.671-1.5-1.5s.672-1.5 1.5-1.5h1c.828 0 1.5.671 1.5 1.5S25.328 37 24.5 37zM24.5 20h-1c-.828 0-1.5-.671-1.5-1.5s.672-1.5 1.5-1.5h1c.828 0 1.5.671 1.5 1.5S25.328 20 24.5 20z"></path>
+                                    </svg>
+                                </span>
+                                <span>my self</span>
+                            </a>
+                        </li>
+                        {% if is_signedin %}
+                        <li class="logout">
+                            <a href="#" class="flex_col side_nav_items justify_center align_center">
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#2c2307"><path d="M440-440q17 0 28.5-11.5T480-480q0-17-11.5-28.5T440-520q-17 0-28.5 11.5T400-480q0 17 11.5 28.5T440-440ZM280-120v-80l240-40v-445q0-15-9-27t-23-14l-208-34v-80l220 36q44 8 72 41t28 77v512l-320 54Zm-160 0v-80h80v-560q0-34 23.5-57t56.5-23h400q34 0 57 23t23 57v560h80v80H120Zm160-80h400v-560H280v560Z"/></svg>
+                                </span>
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </main>
+                {% endif %}
             </div>
             {% endif %}
 
@@ -129,7 +149,7 @@
 
         <footer id="page_footer">
         </footer>
-        <script src="https://sf-cdn.coze.com/obj/unpkg-va/flow-platform/chat-app-sdk/0.1.0-beta.5/libs/oversea/index.js"></script>
+        <!-- <script src="https://sf-cdn.coze.com/obj/unpkg-va/flow-platform/chat-app-sdk/0.1.0-beta.5/libs/oversea/index.js"></script>
         <script>
           new CozeWebSDK.WebChatClient({
             config: {
@@ -139,7 +159,7 @@
               title: 'Coze',
             },
           });
-      </script>
+      </script> -->
     </div>
 </body>
 </html>
