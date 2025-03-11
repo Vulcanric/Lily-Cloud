@@ -70,6 +70,7 @@ function validateUser() {
 
 export function togglePasswordVisibility() {
     const passwordInputField = document.getElementById("password");
+    const passwordIcon = document.getElementById("password_eye")
     if (passwordInputField.type === 'password') {
         passwordInputField.type = 'text';
         passwordIcon.innerHTML = buttonIcons["eye_open"];
