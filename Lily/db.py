@@ -26,7 +26,13 @@ class DB:
     def __init__(self) -> None:
         """ Initialize DB class
         """
-        self._DB = redis_om.get_redis_connection()
+        self._DB = redis_om.get_redis_connection(
+            host='redis-12130.c100.us-east-1-4.ec2.redns.redis-cloud.com',
+            port=12130,
+            decode_responses=True,
+            username="default",
+            password="aigIA6X9fHPKskcx2LEYeGbso49Onay4"
+        )
         # Index all User and Book attributes specified to be indexed
         # so I can query database using them. Migrator.run()
         redis_om.Migrator().run()
